@@ -18,7 +18,7 @@ export default class App extends Component {
     return (
      <View>
      <Text>
-     I am onnn....bucjidoeij
+     I am fucking onnn....bucjidoeij..working like a charm
      </Text>
      </View>
     );
