@@ -7,40 +7,21 @@
  */
 
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View,Form,Button} from 'react-native';
-import { Icon } from 'react-native-vector-icons/FontAwesome';
+import {Platform, StyleSheet, Text, View,Form,Button
+} from 'react-native';
+
 
 
 
 export default class App extends Component {
   render() {
     return (
-      <View style={{backgroundColor:'grey',height:'100%'}}>
-
+     <View>
      <Text>
-      Hey there..
+     I am onnn....bucjidoeij
      </Text>
-
-      </View>
+     </View>
     );
   }
 }
 
-/*const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});*/
