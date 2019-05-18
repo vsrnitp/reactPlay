@@ -8,6 +8,7 @@ import ValidationRules from '../../utils/forms/validationRules';
 import { connect } from 'react-redux';
 import{ signUp,signIn}  from '../../store/actions/user_action';
 import { bindActionCreators } from 'redux';
+
 import {setTokens} from'../../utils/misc';
 
 
@@ -237,7 +238,7 @@ const styles = StyleSheet.create({
 
 //connecting the redux....
 function mapStateToProps(state){
-  console.warn(state)
+  //console.warn(state)
     return{
         User:state.User
     }
