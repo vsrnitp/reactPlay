@@ -9,19 +9,24 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View,Form,Button
 } from 'react-native';
+import {RootNavigator} from './src/routes/routes';
 
 
 
 
 export default class App extends Component {
   render() {
+//from root navigator
+const Nav = RootNavigator();
+
     return (
-     <View>
-     <Text>
-     I am fucking onnn....bucjidoeij..working like a charm
-     </Text>
+     <View
+     style={{flex:1,backgroundColor:'#fff'}}
+     >
+    <Nav/>
      </View>
     );
   }
 }
+
 
