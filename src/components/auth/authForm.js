@@ -4,6 +4,11 @@ import {Platform, ScrollView,ActivityIndicator,
 } from 'react-native';
 import Input from '../../utils/forms/input';
 import ValidationRules from '../../utils/forms/validationRules';
+//doing the redux logic....
+import { connect } from 'react-redux';
+import{ signUp,signIn}  from '../../store/actions/user_action';
+import { bindActionCreators } from 'redux';
+import {setTokens} from'../../utils/misc';
 
 
 
@@ -82,16 +87,68 @@ class AuthForm extends Component {
         formCopy[name].valid = valid;
 
         // checking if valid or not....
-      alert(valid)
+      //alert(valid)
                 //updating the original state...
         this.setState({
             form:formCopy
         })
     }
 
+    // manage access
+ manageAccess = () => {
+  
+    if(!this.props.User.auth.uid){
+        this.setState({hasErrors:true})
+    }else{
+        setTokens(this.props.User.auth,()=>{
+           // console.warn(this.props.User.auth)
+            this.setState({hasErrors:false});
+            this.props.goNext();
+        })
+    }
+}
+
     //submitting the user details...
     submitUser = () => {
+      let isFormValid = true;
+      let formToSubmit = {};
+      const formCopy = this.state.form;
+      
+      for(let key in formCopy){
+        if(this.state.type==='Login'){
+            //login
+            if(key !== 'confirmPassword'){
+                isFormValid = isFormValid && formCopy[key].valid;
+                formToSubmit[key] = formCopy[key].value;
+            }
 
+        }else{
+            //register
+            isFormValid = isFormValid && formCopy[key].valid;
+            formToSubmit[key] = formCopy[key].value;
+        }
+
+      }
+
+      if(isFormValid){
+        if(this.state.type === 'Login'){
+        this.props.signIn(formToSubmit).
+        then(()=>{
+            this.manageAccess()
+        })
+        }else{
+            //console.warn(formToSubmit)
+        this.props.signUp(formToSubmit).
+        then(()=>{
+            this.manageAccess()
+        })
+        
+        }
+      }else{
+          this.setState({
+              hasErrors:true
+          })
+      }
     }
 
     // changing the form type from login to register..
@@ -178,4 +235,17 @@ const styles = StyleSheet.create({
     }
 })
 
-export default AuthForm;
+//connecting the redux....
+function mapStateToProps(state){
+  console.warn(state)
+    return{
+        User:state.User
+    }
+    
+}
+
+function mapDispacthToProps(dispatch){
+    return bindActionCreators({signIn,signUp},dispatch);
+}
+
+export default connect(mapStateToProps,mapDispacthToProps)(AuthForm);
