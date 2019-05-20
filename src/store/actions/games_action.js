@@ -31,15 +31,15 @@ export function getGames(){
                     })
                 }
 
-                console.warn(responseData)
+                resolve(responseData)
             })
+        }).catch(e=>{
+            reject(false)
         })
     })
 
     return {
         type:GET_GAMES,
-        payload:{
-            games:'bhudico'
-        }
+        payload:promise
     }
 }
