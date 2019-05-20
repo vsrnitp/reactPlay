@@ -1,12 +1,25 @@
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View,Form,Button
+import {Platform, StyleSheet,
+  Image,
+  ScrollView,
+  TouchableOpacity,
+  Text, View,Form,Button
 } from 'react-native';
+import {connect} from 'react-redux';
+
+import {getGames} from '../../store/actions/games_action';
+import Moment from 'moment';
 
 
 
 
 
-export default class GamesComponent extends Component {
+class GamesComponent extends Component {
+
+componentDidMount(){
+  this.props.dispatch(getGames())
+}
+
   render() {
     return (
      <View>
@@ -15,3 +28,14 @@ export default class GamesComponent extends Component {
     );
   }
 }
+
+
+
+function mapStateToProps(state){
+  console.warn(state);
+  return {
+    Games:state.Games
+  }
+}
+
+export default connect(mapStateToProps)(GamesComponent);

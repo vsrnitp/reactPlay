@@ -36,3 +36,24 @@ AsyncStorage.multiSet([
 )
 
 }
+
+
+export const convertFirebase = (data) => {
+    const newData = [];
+
+    for(let key in data){
+        newData.push({
+            ...data[key],
+            id:key
+        })
+    }
+    return newData;
+}
+
+
+export const findTeamData = (itemId,teams) => {
+  const value = teams.find((team)=>{
+    return team.id === itemId
+  })
+  return value;
+}
